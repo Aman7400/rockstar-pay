@@ -1,9 +1,10 @@
 import { Avatar, Box, ChakraProvider, extendTheme, Heading, HStack, IconButton, Input, InputGroup, InputLeftElement, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
 import { MdOutlineLocalOffer, MdOutlineListAlt } from "react-icons/md";
-import { AiOutlineWallet, AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineWallet,AiOutlineShoppingCart, AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
 import { BiUserCircle } from "react-icons/bi";
 import { IoIosNotificationsOutline } from "react-icons/io"
+import { HiOutlineCurrencyRupee } from "react-icons/hi"
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -93,7 +94,9 @@ const sideBarItems = [
     { title: "Home", href: "/", icon: <AiOutlineHome />, },
     { title: "Upi", href: "/upi", icon: <AiOutlineWallet />, },
     { title: "Offers", href: "/offers", icon: <MdOutlineLocalOffer />, },
-    { title: "Activity", href: "/activities/transactions", icon: <MdOutlineListAlt />, },
+    { title: "Transactions", href: "/activities/transactions", icon: <MdOutlineListAlt />, },
+    { title: "Payments", href: "/activities/payments", icon: <HiOutlineCurrencyRupee />, },
+    { title: "Spends", href: "/activities/spends", icon: <AiOutlineShoppingCart />, },
     { title: "Account", href: "/account", icon: <BiUserCircle />, },
 ]
 
