@@ -1,4 +1,4 @@
-import { Avatar, Box, ChakraProvider, Heading, HStack, IconButton, Input, InputGroup, InputLeftElement, Text, VStack } from '@chakra-ui/react';
+import { Avatar, Box, ChakraProvider, extendTheme, Heading, HStack, IconButton, Input, InputGroup, InputLeftElement, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
 import { MdOutlineLocalOffer, MdOutlineListAlt } from "react-icons/md";
 import { AiOutlineWallet, AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
@@ -10,10 +10,21 @@ import { useRouter } from 'next/router';
 
 
 
+
+
 const Layout = ({ children }) => {
+
+    const theme = extendTheme({
+        fonts: {
+            body: "'Poppins', sans-serif",
+            heading: "'Poppins', sans-serif",
+        },
+    })
+
+
     return (
-        <ChakraProvider>
-            <Box bgColor={"gray.200"} height={"100vh"} flex={1} p={8}>
+        <ChakraProvider theme={theme} resetCSS>
+            <Box bgColor={"purple.100"} height={"100vh"} flex={1} p={8}>
                 {/* Navbar */}
                 <Navbar />
                 {/* Sidebar | Content */}
@@ -25,8 +36,6 @@ const Layout = ({ children }) => {
                         {children}
                     </Box>
                 </HStack>
-
-
             </Box>
         </ChakraProvider>
     )
@@ -69,9 +78,11 @@ function NavSearchbar() {
                 color='white'
                 fontSize='1.2em'
             >
-                <AiOutlineSearch />
+                <AiOutlineSearch color="purple" />
             </InputLeftElement>
-            <Input variant={"filled"} placeholder='Search' />
+            <Input variant={"filled"} _hover={{
+                backgroundColor: "gray.100"
+            }} bgColor="white" color="purple" placeholder='Search' />
         </InputGroup>
 
     )
@@ -94,7 +105,7 @@ function Sidebar() {
             {
                 sideBarItems.map((item, index) =>
                     <Link href={item.href} key={index}>
-                        <IconButton colorScheme={pathname === item.href ? "purple" : "gray"} size={"lg"} icon={item.icon} />
+                        <IconButton variant={pathname === item.href ? "solid" : "ghost"} borderRadius={100} colorScheme={"purple"} size={"lg"} icon={item.icon} />
                     </Link>)
             }
         </VStack>
