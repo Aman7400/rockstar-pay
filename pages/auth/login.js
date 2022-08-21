@@ -1,7 +1,22 @@
-export default function Login(){
-    return (
-        <div>
-            Login
-        </div>
-    )
+import { Container, Heading } from "@chakra-ui/react";
+import Head from "next/head";
+
+export default function Login() {
+  return (
+    <>
+      <Head>
+        <title> Log in to your account | Rockstar Credits </title>
+        <meta name="description" content="A one-stop payment solution for all your spends. Earn up to 2% cashback with rockstar super card." />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Container maxW={"container.xl"}>
+        <Heading>
+          Login
+        </Heading>
+      </Container>
+    </>
+
+
+  )
 }
+

@@ -1,14 +1,19 @@
 import { Container, Heading } from "@chakra-ui/react";
+import Head from "next/head";
 
 export default function Account() {
     return (
-        <Container maxW={"container"} p={8} pt={4} flex={1}>
-            {
-                [1, 2, 3, 4, 5].map((item) =>
-                    <Heading mb={8} key={item}>
-                        Account {item}
-                    </Heading>)
-            }
-        </Container>
+        <>
+            <Head>
+                <title>Account Details </title>
+                <meta name="description" content="A one-stop payment solution for all your spends. Earn up to 2% cashback with rockstar super card." />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
+            <Container maxW={"container.xl"}>
+                <Heading>
+                    Account Details
+                </Heading>
+            </Container>
+        </>
     )
 }
