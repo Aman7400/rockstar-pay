@@ -93,7 +93,7 @@ const sideBarItems = [
     { title: "Home", href: "/", icon: <AiOutlineHome />, },
     { title: "Upi", href: "/upi", icon: <AiOutlineWallet />, },
     { title: "Offers", href: "/offers", icon: <MdOutlineLocalOffer />, },
-    { title: "Activity", href: "/activities", icon: <MdOutlineListAlt />, },
+    { title: "Activity", href: "/activities/transactions", icon: <MdOutlineListAlt />, },
     { title: "Account", href: "/account", icon: <BiUserCircle />, },
 ]
 

@@ -36,7 +36,7 @@ function UpcomingPayments() {
           Upcoming payments
         </Heading>
         <Heading size="xs" color="purple.500">
-          <Link href="/activities">
+          <Link href="/activities/payments">
             See All
           </Link>
         </Heading>
@@ -83,7 +83,7 @@ function CurrentMonthSpends() {
           {monthNames[d.getMonth()]} Spends
         </Heading>
         <Heading size="xs" color="purple.500">
-          <Link href="/activities">
+          <Link href="/activities/spends">
             See All
           </Link>
         </Heading>
@@ -106,7 +106,7 @@ function RecentTransactionTable() {
           Recent Transactions
         </Heading>
         <Heading size="xs" color="purple.500">
-          <Link href="/activities">
+          <Link href="/activities/transactions">
             See All
           </Link>
         </Heading>
