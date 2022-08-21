@@ -39,9 +39,13 @@ function Navbar() {
         <HStack justifyContent={"space-between"} mb={8} alignItems={"center"}>
             <HStack>
                 {/* Logo */}
+
                 <Heading mr={8}>
-                    Rockstar
+                    <Link href="/">
+                        Rockstar
+                    </Link>
                 </Heading>
+
                 {/* Searchbar */}
                 <NavSearchbar />
             </HStack>
