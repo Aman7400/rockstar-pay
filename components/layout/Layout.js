@@ -53,7 +53,9 @@ function Navbar() {
                 {/* Notification */}
                 <IconButton mr={2} size="sm" icon={<IoIosNotificationsOutline />} />
                 {/* Avatar */}
-                <Avatar src='https://bit.ly/dan-abramov' size={"sm"} />
+                <Link href="/account">
+                    <Avatar cursor={"pointer"} src='https://bit.ly/dan-abramov' size={"sm"} />
+                </Link>
             </HStack>
         </HStack>
     )
