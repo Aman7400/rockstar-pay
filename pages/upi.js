@@ -2,7 +2,7 @@ import { Button, Container, Heading, Input, InputGroup, InputLeftElement, Radio,
 import Head from "next/head";
 import React from "react";
 import { BiRupee } from "react-icons/bi";
-import { BsPencilSquare,BsFillTelephoneFill,BsBank } from "react-icons/bs";
+import { BsPencilSquare, BsFillTelephoneFill, BsBank } from "react-icons/bs";
 import { IoPersonOutline } from "react-icons/io5";
 
 export default function Upi() {
@@ -28,7 +28,7 @@ function UpiPayment() {
 
     const toast = useToast()
 
-    const [mode, setMode] = React.useState("1");
+    const [mode, setMode] = React.useState("upi");
 
     const [loading, setLoading] = React.useState(false)
     const [amount, setAmount] = React.useState(0)
@@ -36,8 +36,8 @@ function UpiPayment() {
     const [customerUpiId, setCustomerUpiId] = React.useState("")
     const [customerPhone, setCustomerPhone] = React.useState("")
     const [customerAccount, setCustomerAccount] = React.useState({
-        accountNo:"",
-        ifsc:""
+        accountNo: "",
+        ifsc: ""
     })
 
 
@@ -55,17 +55,10 @@ function UpiPayment() {
         }, 3000)
     }
 
-    return (
-        <VStack mx="auto" width={"480px"} boxShadow="md" p={8}>
-            <RadioGroup  mb={4} onChange={setMode} value={mode}>
-                <Stack direction='row' spacing="4">
-                    <Radio value='1'>UPI ID</Radio>
-                    <Radio value='2'>Phone Number</Radio>
-                    <Radio value='3'>Account Details</Radio>
-                </Stack>
-            </RadioGroup>
-            {
-                mode === '1' &&
+
+    function getModeWiseInput(mode) {
+        let allModes = {
+            "upi":
                 <InputGroup size="lg">
                     <InputLeftElement
                         pointerEvents='none'
@@ -75,10 +68,8 @@ function UpiPayment() {
                         <IoPersonOutline />
                     </InputLeftElement>
                     <Input value={customerUpiId} onChange={(e) => setCustomerUpiId(e.target.value)} placeholder="Enter UPI ID" />
-                </InputGroup>
-            }
-             {
-                mode === '2' &&
+                </InputGroup>,
+            "phoneNo":
                 <InputGroup size="lg">
                     <InputLeftElement
                         pointerEvents='none'
@@ -88,33 +79,46 @@ function UpiPayment() {
                         <BsFillTelephoneFill />
                     </InputLeftElement>
                     <Input value={customerPhone} onChange={(e) => setCustomerPhone(e.target.value)} type="number" placeholder="Enter Phone Number" />
-                </InputGroup>
-            }
-            {
-                mode === '3' &&
-               <>
-                <InputGroup size="lg">
-                    <InputLeftElement
-                        pointerEvents='none'
-                        fontSize='1.2em'
-                        color={"gray"}
-                    >
-                        <BsBank />
-                    </InputLeftElement>
-                    <Input value={customerAccount.accountNo} onChange={(e) => setCustomerAccount(prev => ({...prev,accountNo:e.target.value}))} type="number" placeholder="Enter Account No" />
-                </InputGroup>
-                <InputGroup size="lg">
-                    <InputLeftElement
-                        pointerEvents='none'
-                        fontSize='1.2em'
-                        color={"gray"}
-                    >
-                        <IoPersonOutline />
-                    </InputLeftElement>
-                    <Input value={customerAccount.ifsc} onChange={(e) => setCustomerAccount(prev => ({...prev,ifsc:e.target.value}))}  placeholder="Enter IFSC Code" />
-                </InputGroup>
-               </>
-            }
+                </InputGroup>,
+            "account":
+                <>
+                    <InputGroup size="lg">
+                        <InputLeftElement
+                            pointerEvents='none'
+                            fontSize='1.2em'
+                            color={"gray"}
+                        >
+                            <BsBank />
+                        </InputLeftElement>
+                        <Input value={customerAccount.accountNo} onChange={(e) => setCustomerAccount(prev => ({ ...prev, accountNo: e.target.value }))} type="number" placeholder="Enter Account No" />
+                    </InputGroup>
+                    <InputGroup size="lg">
+                        <InputLeftElement
+                            pointerEvents='none'
+                            fontSize='1.2em'
+                            color={"gray"}
+                        >
+                            <IoPersonOutline />
+                        </InputLeftElement>
+                        <Input value={customerAccount.ifsc} onChange={(e) => setCustomerAccount(prev => ({ ...prev, ifsc: e.target.value }))} placeholder="Enter IFSC Code" />
+                    </InputGroup>
+                </>
+
+        }
+
+        return allModes[mode];
+    }
+
+    return (
+        <VStack mx="auto" width={"480px"} boxShadow="md" p={8}>
+            <RadioGroup mb={4} onChange={setMode} value={mode}>
+                <Stack direction='row' spacing="4">
+                    <Radio value='upi'>UPI ID</Radio>
+                    <Radio value='phoneNo'>Phone Number</Radio>
+                    <Radio value='account'>Account Details</Radio>
+                </Stack>
+            </RadioGroup>
+            {getModeWiseInput(mode)}
             <InputGroup size="lg">
                 <InputLeftElement
                     pointerEvents='none'
@@ -135,10 +139,11 @@ function UpiPayment() {
                 </InputLeftElement>
                 <Input value={note} onChange={(e) => setNote(e.target.value)} placeholder="Add Note" />
             </InputGroup>
-            <Button disabled={amount<=0} isLoading={loading} onClick={handleMakeUpiPayment} size="lg" colorScheme="purple">
+            <Button disabled={amount <= 0} isLoading={loading} onClick={handleMakeUpiPayment} size="lg" colorScheme="purple">
                 Send &#8377;{amount || 0}
             </Button>
         </VStack>
     )
 
 }
+
