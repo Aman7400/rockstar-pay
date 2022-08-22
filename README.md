@@ -1,34 +1,18 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Rockstar Pay
+A **BNPL (Buy Now Pay Later)** service platform website UI powered 
+by **Next JS** and **Chakra UI**
 
-## Getting Started
+## UI Screens
+### Home
+![screencapture-localhost-3000-2022-08-22-10_15_32](https://user-images.githubusercontent.com/47267731/185841851-d05cdf05-174e-4cfd-a82a-ca0e2b285e21.png)
 
-First, run the development server:
+### Money Transfer
+![screencapture-localhost-3000-upi-2022-08-22-10_15_48](https://user-images.githubusercontent.com/47267731/185841897-37f8d7b2-2058-446d-9cbd-afc61ff6fd35.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+### Transaction History
+![screencapture-localhost-3000-activities-transactions-2022-08-22-10_16_07](https://user-images.githubusercontent.com/47267731/185841912-007e0cc0-489e-4e12-94ad-618236bb9d83.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Profile Page
+![screencapture-localhost-3000-account-2022-08-22-10_16_28](https://user-images.githubusercontent.com/47267731/185841931-e2e1aafc-527c-4936-ac8d-012785c362ea.png)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
