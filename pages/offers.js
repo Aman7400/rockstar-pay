@@ -1,7 +1,23 @@
-import { Box, Button, Container, Grid, GridItem, Heading, HStack, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, useDisclosure, VStack } from "@chakra-ui/react";
+import { Box, Button, Container, Grid, GridItem, Heading, HStack, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Text, useDisclosure, useToast, VStack } from "@chakra-ui/react";
+import { INTERNALS } from "next/dist/server/web/spec-extension/request";
 import Head from "next/head";
 import React from "react";
 import { AiOutlineClockCircle } from "react-icons/ai"
+
+const topOffers = [
+    { title: "Paytm Flights", offer: "Get upto 15% off on flight bookings ", colorScheme: "blue.100", img: '/flights.webp' },
+    { title: "Zomato", offer: "Get flat 100Rs off on your orders", colorScheme: "red.300", img: '/zomato.jpeg' },
+    { title: "Swiggy Instmart", offer: "Get flat 75Rs off on groceries instantly", colorScheme: "pink.300", img: '/swiggy.webp' },
+    { title: "Make My Trip", offer: "Get upto 15% off on your travel plans", colorScheme: "teal.200", img: '/mmt.webp' },
+
+]
+
+const powerups = [
+    { companyName: "Pizza Hut", logo: "/ph-logo.png", offer: 'Get 5% cashback' },
+    { companyName: "Urban Company", logo: "/uc-logo.png", offer: 'Get 10% cashback' },
+    { companyName: "Burger King", logo: "/bk-logo.png", offer: 'Get 15% cashback' },
+    { companyName: "Starbucks", logo: "/sb-logo.png", offer: 'Get 20% cashback' },
+]
 
 export default function Offers() {
     return (
@@ -19,14 +35,15 @@ export default function Offers() {
     )
 }
 
-const powerups = [
-    { companyName: "Pizza Hut", logo: "/ph-logo.png", },
-    { companyName: "Urban Company", logo: "/uc-logo.png" },
-    { companyName: "Burger King", logo: "/bk-logo.png" },
-    { companyName: "Starbucks", logo: "/sb-logo.png" },
-]
+
 
 function Powerups() {
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const [modalItem, setModalItem] = React.useState({
+        companyName: "",
+        logo: "",
+        offer: ""
+    })
     return (
         <>
             <Heading size="lg">
@@ -35,14 +52,18 @@ function Powerups() {
             <HStack my={8} gap={4}>
                 {
                     powerups.map((item, i) =>
-                        <Box cursor="pointer" key={i} p={4} borderRadius="8" boxShadow="md">
+                        <Box
+                            onClick={() => {
+                                setModalItem(powerups[i])
+                                onOpen()
+                            }} cursor="pointer" key={i} p={4} borderRadius="8" boxShadow="md">
                             {/* Company Name */}
                             <Heading size="md">
                                 {item.companyName}
                             </Heading>
                             {/* Powerup Name */}
                             <Text my={4} fontSize="2xl">
-                                Get {5 * (i + 1)}% cashback
+                                {item.offer}
                             </Text>
                             <HStack justifyContent="space-between">
                                 {/* time left */}
@@ -56,17 +77,58 @@ function Powerups() {
                         </Box>)
                 }
             </HStack>
+            <PowerUpModal isOpen={isOpen} onClose={onClose} modalItem={modalItem} />
         </>
     )
 }
 
-const topOffers = [
-    { title: "Paytm Flights", offer: "Get upto 15% off on flight bookings ", colorScheme: "blue.100", img: '/flights.webp' },
-    { title: "Zomato", offer: "Get flat 100Rs off on your orders", colorScheme: "red.300", img: '/zomato.jpeg' },
-    { title: "Swiggy Instmart", offer: "Get flat 75Rs off on groceries instantly", colorScheme: "pink.300", img: '/swiggy.webp' },
-    { title: "Make My Trip", offer: "Get upto 15% off on your travel plans", colorScheme: "teal.200", img: '/mmt.webp' },
+function PowerUpModal({ isOpen, onClose, modalItem }) {
 
-]
+    const toast = useToast()
+    const [isLoading, setIsLoading] = React.useState(false)
+
+    const handleActivateSpark = () => {
+        setIsLoading(true)
+        setTimeout(() => {
+            toast({
+                title: `Powerup Added 🥳`,
+                status: 'success',
+            });
+            setIsLoading(false)
+            onClose()
+        }, 3000)
+
+
+    }
+
+    return (
+        <Modal isOpen={isOpen} onClose={onClose} >
+            <ModalOverlay />
+            <ModalContent>
+                <ModalCloseButton />
+                <ModalBody >
+                    <VStack p={8} justifyContent="center">
+                        <HStack my={4}>
+                            <Heading size="md">
+                                {modalItem.companyName}
+                            </Heading>
+                            <img src={modalItem.logo} width={48} height={48} alt={`Brand ${modalItem.companyName}`} />
+                        </HStack>
+                        <Text align="center" fontSize="xl" >
+                            {modalItem.offer}
+                        </Text>
+                        <HStack >
+                            <AiOutlineClockCircle />   <Text color={modalItem.colorScheme}> {new Date().getHours()} days left</Text>
+                        </HStack>
+                        <Button isLoading={isLoading} onClick={handleActivateSpark} my={4} variant="solid" size="lg">
+                            Activate Powerup
+                        </Button>
+                    </VStack>
+                </ModalBody>
+            </ModalContent>
+        </Modal>
+    )
+}
 
 function SpecialOffers() {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -119,7 +181,7 @@ function SpecialOffers() {
     )
 }
 
-function OfferModal({isOpen,onClose,modalItem}) {
+function OfferModal({ isOpen, onClose, modalItem }) {
     return (
         <Modal isOpen={isOpen} onClose={onClose} >
             <ModalOverlay />
