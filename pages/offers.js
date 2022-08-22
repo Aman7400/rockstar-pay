@@ -12,7 +12,7 @@ const topOffers = [
 
 ]
 
-const powerups = [
+const allPowerups = [
     { companyName: "Pizza Hut", logo: "/ph-logo.png", offer: 'Get 5% cashback' },
     { companyName: "Urban Company", logo: "/uc-logo.png", offer: 'Get 10% cashback' },
     { companyName: "Burger King", logo: "/bk-logo.png", offer: 'Get 15% cashback' },
@@ -44,6 +44,14 @@ function Powerups() {
         logo: "",
         offer: ""
     })
+
+    const [powerups,setPowerups] = React.useState([...allPowerups])
+ 
+    const filterPowerups = (name) => {
+        let temp = powerups.filter((item) => item.companyName !== name)
+        setPowerups([...temp]);
+    }
+
     return (
         <>
             <Heading size="lg">
@@ -77,17 +85,17 @@ function Powerups() {
                         </Box>)
                 }
             </HStack>
-            <PowerUpModal isOpen={isOpen} onClose={onClose} modalItem={modalItem} />
+            <PowerUpModal isOpen={isOpen} onClose={onClose} modalItem={modalItem} removeAfterAddingPowerups={() => filterPowerups(modalItem.companyName)} />
         </>
     )
 }
 
-function PowerUpModal({ isOpen, onClose, modalItem }) {
+function PowerUpModal({ isOpen, onClose, modalItem, removeAfterAddingPowerups }) {
 
     const toast = useToast()
     const [isLoading, setIsLoading] = React.useState(false)
 
-    const handleActivateSpark = () => {
+    const handleActivatePowerup = () => {
         setIsLoading(true)
         setTimeout(() => {
             toast({
@@ -96,6 +104,7 @@ function PowerUpModal({ isOpen, onClose, modalItem }) {
             });
             setIsLoading(false)
             onClose()
+            removeAfterAddingPowerups() // Remove an added powerup
         }, 3000)
 
 
@@ -120,7 +129,7 @@ function PowerUpModal({ isOpen, onClose, modalItem }) {
                         <HStack >
                             <AiOutlineClockCircle />   <Text color={modalItem.colorScheme}> {new Date().getHours()} days left</Text>
                         </HStack>
-                        <Button isLoading={isLoading} onClick={handleActivateSpark} my={4} variant="solid" size="lg">
+                        <Button isLoading={isLoading} onClick={handleActivatePowerup} my={4} variant="solid" size="lg">
                             Activate Powerup
                         </Button>
                     </VStack>
