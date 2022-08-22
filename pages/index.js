@@ -1,6 +1,9 @@
-import { Box, Button, Container, Grid, GridItem, Heading, HStack, Table, TableCaption, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr, VStack } from "@chakra-ui/react";
+import { Box, Button, Container, Grid, GridItem, Heading, HStack, IconButton, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Table, TableCaption, TableContainer, Tbody, Td, Text, Tfoot, Th, Thead, Tr, VStack } from "@chakra-ui/react";
 import Head from "next/head";
 import Link from "next/link";
+import { Tooltip } from '@chakra-ui/react'
+import { AiOutlineInfoCircle } from "react-icons/ai"
+import React from "react";
 
 export default function Home() {
   return (
@@ -12,7 +15,10 @@ export default function Home() {
       </Head>
       <Grid templateColumns='repeat(3, 1fr)' gap={8} maxW={"container.xl"} p={8}>
         <GridItem colSpan={2}>
-          <CurrentMonthSpends />
+          <HStack justifyContent="space-evenly" mb={8} spacing={8}>
+            <AvailableCreditLimit />
+            <CurrentMonthSpends />
+          </HStack>
           <RecentTransactionTable />
         </GridItem>
         <GridItem colSpan={1}>
@@ -67,6 +73,36 @@ function UpcomingPayments() {
 
 }
 
+
+
+function AvailableCreditLimit() {
+  return (
+    <Box boxShadow={"md"} flex={1} p={8} >
+      <HStack justifyContent="space-between">
+        <Heading size="lg">
+          Purchase Power
+        </Heading>
+        <Popover placement='bottom-end'>
+          <PopoverTrigger >
+            <IconButton variant="ghost" colorScheme="purple" icon={<AiOutlineInfoCircle />} />
+          </PopoverTrigger>
+          <PopoverContent>
+            <PopoverArrow />
+            <PopoverBody>
+              There is no predefined credit limit when you get approved. Instead, you can see the <strong>
+                purchase power
+              </strong> in the app. It&apos;s the estimate amount you may qualify to borrow from Rockstar Pay.
+            </PopoverBody>
+          </PopoverContent>
+        </Popover>
+      </HStack>
+      <Heading size="2xl" color="purple.500" my={2}>
+        &#8377; 2,20,360
+      </Heading>
+    </Box>
+  )
+}
+
 function CurrentMonthSpends() {
 
   const monthNames = ["January", "February", "March", "April", "May", "June",
@@ -76,22 +112,18 @@ function CurrentMonthSpends() {
   const d = new Date();
 
   return (
-
-    <Box mb={8} >
-      <HStack justifyContent="space-between">
-        <Heading size={"lg"}>
-          {monthNames[d.getMonth()]} Spends
+    <Link href="/activities/spends">
+      <Box flex={1} cursor="pointer" boxShadow={"md"} p={8}  >
+        <HStack justifyContent="space-between">
+          <Heading size={"lg"}>
+            {monthNames[d.getMonth()]} Spends
+          </Heading>
+        </HStack>
+        <Heading size="2xl" color="purple.500" my={2}>
+          &#8377; 22,360
         </Heading>
-        <Heading size="xs" color="purple.500">
-          <Link href="/activities/spends">
-            See All
-          </Link>
-        </Heading>
-      </HStack>
-      <Heading size="2xl" color="purple.500" my={2}>
-        &#8377; 22,360
-      </Heading>
-    </Box>
+      </Box>
+    </Link >
 
   )
 }
