@@ -1,4 +1,4 @@
-import { Avatar, Box, ChakraProvider, extendTheme, Heading, HStack, IconButton, Input, InputGroup, InputLeftElement, Menu, MenuButton, MenuItem, MenuList, Text, VStack } from '@chakra-ui/react';
+import { Avatar, Box, ChakraProvider, extendTheme, Heading, HStack, IconButton, Input, InputGroup, InputLeftElement, Menu, MenuButton, MenuItem, MenuList, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
 import { MdOutlineLocalOffer, MdOutlineListAlt } from "react-icons/md";
 import { AiOutlineWallet, AiOutlineShoppingCart, AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
@@ -61,7 +61,7 @@ function Navbar() {
             </HStack>
             <HStack>
                 {/* Notification */}
-                <IconButton mr={2} size="sm" icon={<IoIosNotificationsOutline />} />
+                <NotificationPopover />
                 {/* Avatar */}
                 <Menu>
                     <MenuButton as={Avatar} cursor={"pointer"} src='https://bit.ly/dan-abramov' size={"sm"} />
@@ -89,7 +89,7 @@ function Navbar() {
 
 function NavSearchbar() {
     return (
-        <InputGroup w={"480px"}>
+        <InputGroup boxShadow="sm" w={"480px"}>
             <InputLeftElement
                 pointerEvents='none'
                 color='white'
@@ -105,6 +105,25 @@ function NavSearchbar() {
     )
 }
 
+function NotificationPopover() {
+    return (
+        <Popover placement='bottom-end'>
+            <PopoverTrigger>
+                <IconButton mr={2} size="sm" icon={<IoIosNotificationsOutline />} />
+            </PopoverTrigger>
+            <PopoverContent p={4}>
+                <PopoverArrow />
+                <PopoverCloseButton />
+                <PopoverHeader>
+                    <Heading size="md">
+                        Notifications
+                    </Heading>
+                </PopoverHeader>
+                <PopoverBody>Welcome Aboard!!</PopoverBody>
+            </PopoverContent>
+        </Popover>
+    )
+}
 
 const sideBarItems = [
     { title: "Home", href: "/", icon: <AiOutlineHome />, },
