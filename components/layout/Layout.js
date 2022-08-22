@@ -1,7 +1,7 @@
-import { Avatar, Box, ChakraProvider, extendTheme, Heading, HStack, IconButton, Input, InputGroup, InputLeftElement, Text, VStack } from '@chakra-ui/react';
+import { Avatar, Box, ChakraProvider, extendTheme, Heading, HStack, IconButton, Input, InputGroup, InputLeftElement, Menu, MenuButton, MenuItem, MenuList, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
 import { MdOutlineLocalOffer, MdOutlineListAlt } from "react-icons/md";
-import { AiOutlineWallet,AiOutlineShoppingCart, AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineWallet, AiOutlineShoppingCart, AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
 import { BiUserCircle } from "react-icons/bi";
 import { IoIosNotificationsOutline } from "react-icons/io"
 import { HiOutlineCurrencyRupee } from "react-icons/hi"
@@ -63,9 +63,25 @@ function Navbar() {
                 {/* Notification */}
                 <IconButton mr={2} size="sm" icon={<IoIosNotificationsOutline />} />
                 {/* Avatar */}
-                <Link href="/account">
-                    <Avatar cursor={"pointer"} src='https://bit.ly/dan-abramov' size={"sm"} />
-                </Link>
+                <Menu>
+                    <MenuButton as={Avatar} cursor={"pointer"} src='https://bit.ly/dan-abramov' size={"sm"} />
+                    <MenuList>
+
+                        <Link href="/account">
+                            <MenuItem>
+                                Profile
+                            </MenuItem>
+                        </Link>
+
+                        <Link href="/settings">
+                            <MenuItem>
+                                Settings
+                            </MenuItem>
+                        </Link>
+
+                        <MenuItem>Log Out</MenuItem>
+                    </MenuList>
+                </Menu>
             </HStack>
         </HStack>
     )
