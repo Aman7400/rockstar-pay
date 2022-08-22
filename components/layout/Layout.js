@@ -25,7 +25,7 @@ const Layout = ({ children }) => {
 
     return (
         <ChakraProvider theme={theme} resetCSS>
-            <Box bgColor={"purple.100"} height={"100vh"} flex={1} p={8}>
+            <Box height={"100vh"} flex={1} p={8}>
                 {/* Navbar */}
                 <Navbar />
                 {/* Sidebar | Content */}
@@ -33,7 +33,7 @@ const Layout = ({ children }) => {
                     {/* Sidebar */}
                     <Sidebar />
                     {/* Content */}
-                    <Box borderRadius={"10px"} height={"80vh"} overflowX={"scroll"} bgColor={"white"} flex={1}>
+                    <Box boxShadow="lg" borderRadius={"10px"} height={"80vh"} overflowX={"scroll"} bgColor={"white"} flex={1}>
                         {children}
                     </Box>
                 </HStack>

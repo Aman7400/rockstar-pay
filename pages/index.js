@@ -143,7 +143,7 @@ function RecentTransactionTable() {
           </Link>
         </Heading>
       </HStack>
-      <TableContainer boxShadow="lg" p={5}>
+      <TableContainer boxShadow="sm" p={5}>
         <Table variant='striped' colorScheme='purple'>
           <Thead>
             <Tr>
