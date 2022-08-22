@@ -159,7 +159,6 @@ function RecentTransactionTable() {
                 { amount: 200, paidTo: "Flipkart.com", paidOn: new Date().toDateString() },
                 { amount: 300, paidTo: "Grofers.com", paidOn: new Date().toDateString() },
                 { amount: 400, paidTo: "Swiggy.com", paidOn: new Date().toDateString() },
-                { amount: 500, paidTo: "Zomato.com", paidOn: new Date().toDateString() },
               ]
                 .map((transaction, i) =>
                   <Tr key={i}>
